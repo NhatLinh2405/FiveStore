@@ -1,0 +1,140 @@
+@media only screen and (max-width: 380px) {
+    .nav-container {
+        height: 50px;
+    }
+    .nav-wrapper {
+        padding: 10px 0;
+    }
+    .nav-language {
+        display: none;
+    }
+    .nav-input {
+        width: 60px;
+    }
+    .nav-logo {
+        font-size: 24px;
+    }
+    .nav-right {
+        justify-content: center;
+        flex: 2;
+    }
+    .nav-menuItem {
+        font-size: 12px;
+        margin-left: 10px;
+    }
+
+    /* slide */
+    .slide-container {
+        display: none;
+    }
+
+    /*  cate */
+    .cate-container {
+        padding: 0;
+        flex-direction: column;
+    }
+    .cart-details span {
+        margin: 5px 0;
+    }
+
+    /* cateItem */
+    .cateItem-img {
+        height: 80vh;
+    }
+
+    /* cart */
+    .cart-wrapper {
+        padding: 10px;
+    }
+    .cart-topText {
+        display: none;
+    }
+    .cart-bottom {
+        flex-direction: column;
+    }
+    .cart-product {
+        flex-direction: column;
+    }
+    .cart-productDetail {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .cart-priceDetail {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .cart-productAmount {
+        margin: 5px 15px;
+    }
+    .cart-productPrice {
+        margin-bottom: 20px;
+    }
+
+    /* products */
+    .products-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .products-filter {
+        width: 0 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    .products-filterText {
+        margin-right: 0;
+    }
+    .products-select {
+        margin: 10px 0;
+    }
+
+    /* detail product */
+    .detail-wrapper {
+        padding: 10px;
+        flex-direction: column;
+    }
+    .detail-img {
+        height: 40vh;
+    }
+    .detail-infoContainer {
+        padding: 10px;
+    }
+    .detail-filterContainer {
+        width: 100%;
+    }
+    .detail-addContainer {
+        width: 100%;
+    }
+
+    /* newLetter */
+    .new-desc {
+        text-align: center;
+    }
+    .new-inputContainer {
+        width: 80%;
+    }
+
+    /* footer */
+    .footer-container {
+        flex-direction: column;
+    }
+    .footer-center {
+        display: none;
+    }
+    .footer-right {
+        background-color: #fff8f8;
+    }
+
+    /* login */
+    .log-wrapper {
+        width: 75%;
+    }
+
+    /* register */
+    .reg-wrapper {
+        width: 75%;
+    }
+    .reg-agreement {
+        line-height: 22px;
+    }
+}

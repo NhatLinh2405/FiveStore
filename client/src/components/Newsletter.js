@@ -1,5 +1,5 @@
 import React from "react";
-import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import { AiOutlineSend } from "react-icons/ai";
 
 export default function Newsletter() {
     return (
@@ -18,7 +18,7 @@ export default function Newsletter() {
                     </a>
                 </button> */}
                 <button className="new-button">
-                    <SendOutlinedIcon />
+                    <AiOutlineSend className="normal" />
                 </button>
             </div>
         </div>

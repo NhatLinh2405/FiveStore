@@ -1,9 +1,8 @@
 import React from "react";
 
-import { AiFillGithub } from "react-icons/ai";
+import { AiFillGithub, AiFillPhone } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { AiFillPhone } from "react-icons/ai";
 import { GrMail } from "react-icons/gr";
 
 export default function Footer() {
@@ -22,12 +21,12 @@ export default function Footer() {
                         href="https://www.facebook.com/lays.linh.96"
                         target="_blank"
                         rel="noreferrer"
-                        className="footer-socialIcon blue"
+                        className="footer-socialIcon"
                     >
-                        <BsFacebook />
+                        <BsFacebook className="blue" />
                     </a>
                     <div className="footer-socialIcon">
-                        <AiFillGithub />
+                        <AiFillGithub className="" />
                     </div>
                 </div>
             </div>

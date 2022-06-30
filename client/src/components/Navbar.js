@@ -1,7 +1,5 @@
 import React from "react";
-import Badge from "@mui/material/Badge";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartOutlined from "@mui/icons-material/ShoppingCartOutlined";
+import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 
 const Navbar = () => {
     return (
@@ -15,7 +13,7 @@ const Navbar = () => {
                             placeholder="Search"
                             className="nav-input"
                         />
-                        <SearchIcon className="nav-search" />
+                        <AiOutlineSearch className="nav-search" />
                     </div>
                 </div>
                 <div className="nav-center">
@@ -24,10 +22,11 @@ const Navbar = () => {
                 <div className="nav-right">
                     <div className="nav-menuItem">REGISTER</div>
                     <div className="nav-menuItem">SIGN IN</div>
-                    <div className="nav-menuItem">
-                        <Badge badgeContent={4} color="primary">
-                            <ShoppingCartOutlined />
-                        </Badge>
+                    <div className="nav-menuItem content">
+                        {/* <Badge badgeContent={4} color="primary">
+                        </Badge> */}
+                        <div className="nav-amount">1</div>
+                        <AiOutlineShoppingCart className="big" />
                     </div>
                 </div>
             </div>

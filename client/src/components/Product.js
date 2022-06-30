@@ -1,8 +1,9 @@
 import React from "react";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-
+import {
+    AiOutlineShoppingCart,
+    AiOutlineSearch,
+    AiFillHeart,
+} from "react-icons/ai";
 export default function Product({ item }) {
     return (
         <div className="product-container">
@@ -11,13 +12,13 @@ export default function Product({ item }) {
             </div>
             <div className="product-Info">
                 <div className="product-icon">
-                    <ShoppingCartOutlinedIcon />
+                    <AiOutlineShoppingCart className="normal" />
                 </div>
                 <div className="product-icon">
-                    <SearchOutlinedIcon />
+                    <AiOutlineSearch className="normal" />
                 </div>
                 <div className="product-icon">
-                    <FavoriteBorderOutlinedIcon />
+                    <AiFillHeart className="normal" />
                 </div>
             </div>
         </div>

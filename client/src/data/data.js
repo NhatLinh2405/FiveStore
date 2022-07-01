@@ -24,16 +24,19 @@ export const categories = [
         id: 1,
         img: "/assets/category1.webp",
         title: "SHIRT STYLE!",
+        cat: "woman",
     },
     {
         id: 2,
         img: "/assets/category2.jpg",
         title: "LOUNGEWEAR LOVE",
+        cat: "coat",
     },
     {
         id: 3,
         img: "/assets/category3.jpg",
         title: "LIGHT JACKETS",
+        cat: "jeans",
     },
 ];
 

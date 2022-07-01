@@ -8,7 +8,12 @@ export default function Register() {
                 <form action="" className="reg-form">
                     <input
                         type="text"
-                        placeholder="full name"
+                        placeholder="name"
+                        className="reg-input"
+                    />
+                    <input
+                        type="text"
+                        placeholder="lastname"
                         className="reg-input"
                     />
                     <input
@@ -33,7 +38,7 @@ export default function Register() {
                     />
                     <span className="reg-agreement">
                         By creating an account, I consent to the processing of
-                        my personal data in accordance with the 
+                        my personal data in accordance with the
                         <b> PRIVACY POLICY</b>
                     </span>
                     <button className="reg-button">Create</button>

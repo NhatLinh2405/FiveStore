@@ -1,17 +1,24 @@
-import express from "express";
-import dotenv from "dotenv";
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
 
-import connectDatabase from "./Config/MongoDB.js";
+const connectDatabase = require("./Config/MongoDB.js");
 
-import userRouter from "./Routes/User.js";
-import authRouter from "./Routes/Auth.js";
-import orderRouter from "./Routes/Order.js";
-import cartRouter from "./Routes/Cart.js";
-import productRouter from "./Routes/Product.js";
+const userRouter = require("./Routes/UserRoute.js");
+const authRouter = require("./Routes/AuthRoute.js");
+const productRouter = require("./Routes/ProductRoute.js");
+const cartRouter = require("./Routes/CartRoute.js");
+const orderRouter = require("./Routes/OrderRoute.js");
+const stripeRouter = require("./Routes/Stripe.js");
+const ImportData = require("./ImportData");
+
+const app = express();
+
+app.use(cors());
 
 dotenv.config();
 connectDatabase();
-const app = express();
+
 app.use(express.json());
 
 // api
@@ -20,6 +27,10 @@ app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/carts", cartRouter);
+app.use("/api/checkout", stripeRouter);
+
+//imort data
+app.use("/api/import", ImportData);
 
 app.listen(process.env.PORT || 5000, () => {
     console.log("Server is running on port 5000");

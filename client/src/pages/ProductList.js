@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Products from "../components/Products";
@@ -6,11 +8,24 @@ import Newsletter from "../components/Newsletter";
 import Footer from "./../components/Footer";
 
 export default function ProductList() {
+    let location = useLocation();
+    const cat = location.pathname.split("/")[2];
+
+    const [filters, setFilters] = useState({});
+    const [sort, setSort] = useState("newest");
+
+    const handleFilters = (e) => {
+        const value = e.target.value;
+        setFilters({
+            ...filters,
+            [e.target.name]: value,
+        });
+    };
     return (
         <>
             <Announcement />
             <Navbar />
-            <h1 className="products-title">Dresses</h1>
+            <h1 className="products-title">{cat}</h1>
             <div className="products-filterContainer">
                 <div className="products-filter">
                     <span className="products-filterText">
@@ -19,32 +34,34 @@ export default function ProductList() {
                     <select
                         defaultValue=""
                         className="products-select"
-                        name=""
+                        name="color"
                         id=""
+                        onChange={handleFilters}
                     >
                         <option value="" disabled>
                             Color
                         </option>
-                        <option value="">White</option>
-                        <option value="">Black</option>
-                        <option value="">Blue</option>
-                        <option value="">Yellow</option>
-                        <option value="">Green</option>
+                        <option>white</option>
+                        <option>black</option>
+                        <option>blue</option>
+                        <option>yellow</option>
+                        <option>green</option>
                     </select>
                     <select
                         defaultValue=""
                         className="products-select"
-                        name=""
+                        name="size"
                         id=""
+                        onChange={handleFilters}
                     >
                         <option value="" disabled>
                             Size
                         </option>
-                        <option value="">S</option>
-                        <option value="">M</option>
-                        <option value="">L</option>
-                        <option value="">XL</option>
-                        <option value="">XXL</option>
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+                        <option>XXL</option>
                     </select>
                 </div>
                 <div className="products-filter">
@@ -54,14 +71,15 @@ export default function ProductList() {
                         className="products-select"
                         name=""
                         id=""
+                        onChange={(e) => setSort(e.target.value)}
                     >
-                        <option value="DEFAULT">Newest</option>
-                        <option value="">Price (asc)</option>
-                        <option value="">Price (desc)</option>
+                        <option value="newest">Newest</option>
+                        <option value="asc">Price (asc)</option>
+                        <option value="desc">Price (desc)</option>
                     </select>
                 </div>
             </div>
-            <Products />
+            <Products cat={cat} filters={filters} sort={sort} />
             <Newsletter />
             <Footer />
         </>

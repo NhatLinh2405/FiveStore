@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
@@ -6,44 +7,76 @@ import Newsletter from "../components/Newsletter";
 import Footer from "./../components/Footer";
 
 import { IoIosRemoveCircle, IoMdAddCircle } from "react-icons/io";
+import { pubRequest } from "../utils/request";
+import { addProduct } from "../Redux/CartRedux";
+
+import { useDispatch } from "react-redux";
 
 export default function DetailProduct() {
-    const [qty, setQty] = useState(1);
-    const increaseQty = () => {
-        setQty(qty + 1);
+    let location = useLocation();
+    const dispatch = useDispatch();
+
+    const id = location.pathname.split("/")[2];
+
+    const [product, setProduct] = useState({});
+    const [color, setColor] = useState("");
+    const [size, setSize] = useState("");
+
+    useEffect(() => {
+        const getProduct = async () => {
+            try {
+                const res = await pubRequest.get("/products/find/" + id);
+                setProduct(res.data);
+            } catch {}
+        };
+        getProduct();
+    }, [id]);
+
+    const [quantity, setQuantity] = useState(1);
+
+    const handleQuantity = (type) => {
+        type === "dec"
+            ? quantity > 1 && setQuantity(quantity - 1)
+            : setQuantity(quantity + 1);
     };
-    const decreaseQty = () => {
-        setQty(qty - 1);
+
+    const handleAddToCart = () => {
+        dispatch(
+            addProduct({
+                ...product,
+                quantity,
+                color,
+                size,
+            })
+        );
     };
+
     return (
         <>
-            <Navbar />
             <Announcement />
+            <Navbar />
             <div className="detail-wrapper">
                 <div className="detail-imgContainer">
                     <img
                         className="detail-img"
-                        src="https://i.ibb.co/S6qMxwr/jean.jpg"
-                        alt=""
+                        src={product.img}
+                        alt={product.title}
                     />
                 </div>
                 <div className="detail-infoContainer">
-                    <h1 className="detail-title">Denim Jumpsuit</h1>
-                    <p className="detail-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec venenatis, dolor in finibus malesuada, lectus
-                        ipsum porta nunc, at iaculis arcu nisi sed mauris. Nulla
-                        fermentum vestibulum ex, eget tristique tortor pretium
-                        ut. Curabitur elit justo, consequat id condimentum ac,
-                        volutpat ornare.
-                    </p>
-                    <span className="detail-price">$ 20</span>
+                    <h1 className="detail-title">{product.title}</h1>
+                    <p className="detail-desc">{product.desc}</p>
+                    <span className="detail-price">$ {product.price}</span>
                     <div className="detail-filterContainer">
                         <div className="detail-filter">
                             <span className="detail-filterTitle">Color</span>
-                            <div className="detail-filterColor bgBlue"></div>
-                            <div className="detail-filterColor bgRed"></div>
-                            <div className="detail-filterColor bgGreen"></div>
+                            {product.color?.map((c) => (
+                                <div
+                                    key={c}
+                                    onClick={() => setColor(c)}
+                                    className={`detail-filterColor bg${c}`}
+                                ></div>
+                            ))}
                         </div>
                         <div className="detail-filter">
                             <span className="detail-filterTitle">Size</span>
@@ -52,35 +85,13 @@ export default function DetailProduct() {
                                 defaultValue=""
                                 name=""
                                 id=""
+                                onChange={(e) => setSize(e.target.value)}
                             >
-                                <option
-                                    value=""
-                                    disabled
-                                    className="detail-filterSizeOption"
-                                >
-                                    S
-                                </option>
-                                <option
-                                    value=""
-                                    className="detail-filterSizeOption"
-                                >
-                                    M
-                                </option>
-                                <option
-                                    value=""
-                                    className="detail-filterSizeOption"
-                                >
-                                    L
-                                </option>
-                                <option
-                                    value=""
-                                    className="detail-filterSizeOption"
-                                >
-                                    XL
-                                </option>
-                                <option className="detail-filterSizeOption">
-                                    XXL
-                                </option>
+                                {product.size?.map((s) => (
+                                    <option key={s} value={s}>
+                                        {s}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     </div>
@@ -88,20 +99,25 @@ export default function DetailProduct() {
                         <div className="detail-amountContainer">
                             <button
                                 className="border normal"
-                                onClick={decreaseQty}
+                                onClick={() => handleQuantity("dec")}
                             >
                                 <IoIosRemoveCircle />
                             </button>
 
-                            <span className="detail-amount">{qty}</span>
+                            <span className="detail-amount">{quantity}</span>
                             <div
                                 className="border normal"
-                                onClick={increaseQty}
+                                onClick={() => handleQuantity("inc")}
                             >
                                 <IoMdAddCircle />
                             </div>
                         </div>
-                        <button className="detail-button">Add To Cart</button>
+                        <button
+                            onClick={handleAddToCart}
+                            className="detail-button"
+                        >
+                            Add To Cart
+                        </button>
                     </div>
                 </div>
             </div>

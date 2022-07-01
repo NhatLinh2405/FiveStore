@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 
 import { IoIosRemoveCircle, IoMdAddCircle } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 
 export default function Cart() {
-    const [qty, setQty] = useState(1);
-    const increaseQty = () => {
-        setQty(qty + 1);
-    };
-    const decreaseQty = () => {
-        setQty(qty - 1);
-    };
+    const cart = useSelector((state) => state.cart);
     return (
         <>
             <Navbar />
@@ -31,93 +26,66 @@ export default function Cart() {
                 </div>
                 <div className="cart-bottom">
                     <div className="cart-info">
-                        <div className="cart-product">
-                            <div className="cart-productDetail">
-                                <img
-                                    className="cart-img"
-                                    src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A"
-                                    alt=""
-                                />
-                                <div className="cart-details">
-                                    <span>
-                                        <b>Product:</b> JESSIE THUNDER SHOES
-                                    </span>
-                                    <span>
-                                        <b>ID:</b> 93813718293
-                                    </span>
-                                    <div className="cart-productColor bgBlue"></div>
-                                    <span>
-                                        <b>Size:</b> 37.5
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="cart-priceDetail">
-                                <div className="cart-productAmountContainer">
-                                    <button
-                                        className="border normal"
-                                        onClick={decreaseQty}
-                                    >
-                                        <IoIosRemoveCircle />
-                                    </button>
+                        {cart.products.map((product) => (
+                            <div className="cart-product">
+                                <div className="cart-productDetail">
+                                    <img
+                                        className="cart-img"
+                                        src={product.img}
+                                        alt=""
+                                    />
+                                    <div className="cart-details">
+                                        <span>
+                                            <b>Product:</b> {product.title}
+                                        </span>
+                                        <span>
+                                            <b>ID:</b> {product._id}
+                                        </span>
+                                        <div className="cart-colorContainer">
+                                            <b>Color: </b>
+                                            <div
+                                                className={`cart-productColor bg${product.color}`}
+                                            ></div>
+                                        </div>
 
-                                    <span className="detail-amount">{qty}</span>
-                                    <div
-                                        className="border normal"
-                                        onClick={increaseQty}
-                                    >
-                                        <IoMdAddCircle />
+                                        <span>
+                                            <b>Size:</b> {product.size}
+                                        </span>
                                     </div>
                                 </div>
-                                <div className="cart-productPrice">$ 30</div>
+                                <div className="cart-priceDetail">
+                                    <div className="cart-productAmountContainer">
+                                        <button
+                                            className="border normal"
+                                            onClick=""
+                                        >
+                                            <IoIosRemoveCircle />
+                                        </button>
+
+                                        <span className="detail-amount">
+                                            {product.quantity}
+                                        </span>
+                                        <div
+                                            className="border normal"
+                                            onClick=""
+                                        >
+                                            <IoMdAddCircle />
+                                        </div>
+                                    </div>
+                                    <div className="cart-productPrice">
+                                        $ {product.price * product.quantity}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        ))}
+
                         <hr className="cart-hr" />
-                        <div className="cart-product">
-                            <div className="cart-productDetail">
-                                <img
-                                    src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png"
-                                    alt=""
-                                    className="cart-img"
-                                />
-                                <div className="cart-details">
-                                    <span>
-                                        <b>Product:</b> HAKURA T-SHIRT
-                                    </span>
-                                    <span>
-                                        <b>ID:</b> 93813718293
-                                    </span>
-                                    <div className="cart-productColor bgRed"></div>
-                                    <span>
-                                        <b>Size:</b> M
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="cart-priceDetail">
-                                <div className="cart-productAmountContainer">
-                                    <button
-                                        className="border normal"
-                                        onClick={decreaseQty}
-                                    >
-                                        <IoIosRemoveCircle />
-                                    </button>
-
-                                    <span className="detail-amount">{qty}</span>
-                                    <div
-                                        className="border normal"
-                                        onClick={increaseQty}
-                                    >
-                                        <IoMdAddCircle />
-                                    </div>
-                                </div>
-                                <div className="cart-productPrice">$ 20</div>
-                            </div>
-                        </div>
                     </div>
                     <div className="cart-summary">
                         <h1 className="cart-summaryTitle">ORDER SUMMARY</h1>
                         <div className="cart-summaryItem ">
                             <span>Subtotal</span>
-                            <span>$ 80</span>
+                            <span>$ {cart.total}</span>
                         </div>
                         <div className="cart-summaryItem ">
                             <span>Estimated Shipping</span>
@@ -129,7 +97,7 @@ export default function Cart() {
                         </div>
                         <div type="total" className="cart-summaryItem ">
                             <span>Total</span>
-                            <span>$ 80</span>
+                            <span>$ {cart.total}</span>
                         </div>
                         <button className="cart-button">CHECKOUT NOW</button>
                     </div>

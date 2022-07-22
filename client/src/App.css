@@ -50,6 +50,9 @@ body {
 .blue {
     color: blue;
 }
+.black{
+    color: black;
+}
 /* background-color */
 .bgBlue {
     background-color: blue;
@@ -614,6 +617,13 @@ body {
     color: white;
     cursor: pointer;
     margin-bottom: 10px;
+}
+.log-error{
+    color: red;
+}
+.log-button:disabled{
+    color:greenyellow;
+    cursor: not-allowed;
 }
 .log-link {
     margin: 10px 0px;

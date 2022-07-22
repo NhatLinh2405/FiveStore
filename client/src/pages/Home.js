@@ -9,15 +9,15 @@ import Newsletter from "./../components/Newsletter";
 import Footer from "./../components/Footer";
 
 export default function Home() {
-    return (
-        <div>
-            <Announcement />
-            <Navbar />
-            <Slider />
-            <Categories />
-            <Products />
-            <Newsletter />
-            <Footer />
-        </div>
-    );
+  return (
+    <>
+      <Announcement />
+      <Navbar />
+      <Slider />
+      <Categories />
+      <Products />
+      <Newsletter />
+      <Footer />
+    </>
+  );
 }
